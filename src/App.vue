@@ -1,27 +1,71 @@
 <template>
-  <v-chart class="chart" :option="option" autoresize />
+  <v-chart :option="option2" autoresize />
+  <!-- <v-chart class="chart" :option="option" autoresize /> -->
 </template>
 
 <script>
-import { use } from 'echarts/core';
-import { CanvasRenderer } from 'echarts/renderers';
-import { PieChart } from 'echarts/charts';
 import {
-  TitleComponent,
+  use,
+  registerMap,
+  registerTheme,
+  connect,
+  disconnect,
+} from 'echarts/core';
+import { CanvasRenderer } from 'echarts/renderers';
+import {
+  BarChart,
+  LineChart,
+  PieChart,
+  MapChart,
+  RadarChart,
+  ScatterChart,
+  EffectScatterChart,
+  LinesChart,
+} from 'echarts/charts';
+import {
+  GridComponent,
+  PolarComponent,
+  GeoComponent,
   TooltipComponent,
   LegendComponent,
+  TitleComponent,
+  VisualMapComponent,
+  DatasetComponent,
+  ToolboxComponent,
+  DataZoomComponent,
 } from 'echarts/components';
 import VChart, { THEME_KEY } from 'vue-echarts';
-import GaugeChart from 'echarts/charts';
+//import GaugeChart from 'echarts/charts';
 import { ref, defineComponent } from 'vue';
 
 use([
   CanvasRenderer,
   PieChart,
+  GaugeChart,
   TitleComponent,
   TooltipComponent,
   LegendComponent,
-  GaugeChart,
+  BarChart,
+  LineChart,
+  PieChart,
+  MapChart,
+  RadarChart,
+  ScatterChart,
+  EffectScatterChart,
+  LinesChart,
+  GridComponent,
+  PolarComponent,
+  GeoComponent,
+  TooltipComponent,
+  LegendComponent,
+  TitleComponent,
+  VisualMapComponent,
+  DatasetComponent,
+  CanvasRenderer,
+  SVGRenderer,
+  ToolboxComponent,
+  DataZoomComponent,
+  //GaugeChart,
 ]);
 
 export default defineComponent({
@@ -33,6 +77,19 @@ export default defineComponent({
     [THEME_KEY]: 'dark',
   },
   setup() {
+    const option2 = ref({
+      /*       tooltip: {
+        formatter: '{a} <br/>{b} : {c} ({d}%)',
+      }, */
+      series: [
+        {
+          name: 'Pressre',
+          type: 'gauge',
+          data: [{ value: 50, name: 'SCORE' }],
+        },
+      ],
+    });
+
     const option = ref({
       title: {
         text: 'Traffic Sources',
@@ -71,7 +128,7 @@ export default defineComponent({
       ],
     });
 
-    return { option };
+    return { option, option2 };
   },
 });
 </script>
